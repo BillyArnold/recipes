@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Recipes
+model Recipe {
+  id               Int                @id @default(autoincrement())
+  name             String
+  instructions     String?
+  ingredients      Ingredient[]
+  users            UserRecipe[]
+  RecipeIngredient RecipeIngredient[]
+  MealPlanRecipe   MealPlanRecipe[]
+
+  @@map(name: "recipes")
+}
+
+model RecipeIngredient {
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId     Int
+  quantity     Int
+  units        String
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+
+  @@id([recipeId, ingredientId])
+  @@map(name: "recipe_ingredients")
+}
+
+model UserRecipe {
+  user     User   @relation(fields: [userId], references: [id])
+  userId   Int
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
+
+  @@id([userId, recipeId])
+  @@map(name: "users_recipes")
+}
+
+// Categories
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  @@map(name: "categories")
+}
+
+// Ingredients
+model Ingredient {
+  id       Int                @id @default(autoincrement())
+  name     String
+  recipes  RecipeIngredient[]
+  Recipe   Recipe?            @relation(fields: [recipeId], references: [id])
+  recipeId Int?
+
+  @@map(name: "ingredients")
+}
+
+// Meal Plans
+model MealPlan {
+  id      Int              @id @default(autoincrement())
+  name    String
+  userId  Int?
+  recipes MealPlanRecipe[]
+  user    User?            @relation(fields: [userId], references: [id])
+
+  @@map(name: "meal_plans")
+}
+
+model MealPlanRecipe {
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id])
+  mealPlanId Int
+  recipe     Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId   Int
+  day        Int
+
+  @@id([mealPlanId, recipeId, day])
+  @@map(name: "meal_plan_recipes")
+}
+
+// Users
+model User {
+  id        Int          @id @default(autoincrement())
+  username  String
+  password  String
+  recipes   UserRecipe[]
+  mealPlans MealPlan[]
+
+  @@map(name: "users")
+}
