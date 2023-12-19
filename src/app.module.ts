@@ -7,9 +7,10 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { RecipesModule } from './recipes/recipes.module';
 import { CategoriesModule } from './categories/categories.module';
+import { IngredientsModule } from './ingredients/ingredients.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, ConfigModule.forRoot(), RecipesModule, CategoriesModule],
+  imports: [AuthModule, UsersModule, ConfigModule.forRoot(), RecipesModule, CategoriesModule, IngredientsModule],
   controllers: [AppController, AuthController],
   providers: [AppService],
 })
