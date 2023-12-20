@@ -8,9 +8,10 @@ import { ConfigModule } from '@nestjs/config';
 import { RecipesModule } from './recipes/recipes.module';
 import { CategoriesModule } from './categories/categories.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
+import { MealplansModule } from './mealplans/mealplans.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, ConfigModule.forRoot(), RecipesModule, CategoriesModule, IngredientsModule],
+  imports: [AuthModule, UsersModule, ConfigModule.forRoot(), RecipesModule, CategoriesModule, IngredientsModule, MealplansModule],
   controllers: [AppController, AuthController],
   providers: [AppService],
 })
