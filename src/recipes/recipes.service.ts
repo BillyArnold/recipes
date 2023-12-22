@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, Recipe } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
+import { CreateRecipeIngredientDto } from './dto/create-recipe-ingredient.dto';
 
 @Injectable()
 export class RecipesService {
@@ -41,7 +42,11 @@ export class RecipesService {
     });
   }
 
-  //to do
+  addIngredient(data: Prisma.RecipeIngredientCreateInput) {
+    return this.prisma.recipeIngredient.create({
+      data,
+    });
+  }
 
   //saverecipe for user
 

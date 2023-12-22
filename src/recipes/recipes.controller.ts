@@ -10,9 +10,10 @@ import {
   Put,
 } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
-import { CreateRecipeDto } from './dto/create-recipe.dto';
+import { CreateRecipeIngredientDto } from './dto/create-recipe-ingredient.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Prisma } from '@prisma/client';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('recipes')
 export class RecipesController {
@@ -31,6 +32,11 @@ export class RecipesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.recipesService.findOne(+id);
+  }
+
+  @Post('/ingredient')
+  addIngredient(@Body() data: Prisma.RecipeIngredientCreateInput) {
+    return this.recipesService.addIngredient(data);
   }
 
   @Put(':id')
