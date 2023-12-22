@@ -48,6 +48,15 @@ export class RecipesService {
     });
   }
 
+  updateIngredient(id: number, data: Prisma.RecipeIngredientUpdateInput) {
+    return this.prisma.recipeIngredient.update({
+      data,
+      where: {
+        id,
+      },
+    });
+  }
+
   //saverecipe for user
 
   //scrape bbc good food?
