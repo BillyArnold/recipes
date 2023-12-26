@@ -57,6 +57,14 @@ export class RecipesService {
     });
   }
 
+  deleteRecipeIngredient(id: number) {
+    return this.prisma.recipeIngredient.delete({
+      where: {
+        id,
+      },
+    });
+  }
+
   //saverecipe for user
 
   //scrape bbc good food?

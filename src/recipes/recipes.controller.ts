@@ -47,6 +47,11 @@ export class RecipesController {
     return this.recipesService.updateIngredient(+id, data);
   }
 
+  @Delete('/ingredient')
+  deleteIngredient(@Param('id') id: string) {
+    return this.recipesService.deleteRecipeIngredient(+id);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() data: Prisma.RecipeUpdateInput) {
     return this.recipesService.update(+id, data);
