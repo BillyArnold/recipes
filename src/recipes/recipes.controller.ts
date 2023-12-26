@@ -25,8 +25,8 @@ export class RecipesController {
   }
 
   @Get()
-  findAll() {
-    return this.recipesService.findAll();
+  findAll(@Body() data: Prisma.RecipeFindManyArgs) {
+    return this.recipesService.findAll(data);
   }
 
   @Get(':id')

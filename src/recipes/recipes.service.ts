@@ -13,8 +13,8 @@ export class RecipesService {
     });
   }
 
-  findAll() {
-    return this.prisma.recipe.findMany({});
+  findAll(data: Prisma.RecipeFindManyArgs) {
+    return this.prisma.recipe.findMany(data);
   }
 
   findOne(id: number) {
