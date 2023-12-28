@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { CreateMealplanDto } from './dto/create-mealplan.dto';
-import { UpdateMealplanDto } from './dto/update-mealplan.dto';
 
 @Injectable()
 export class MealplansService {
@@ -37,6 +35,20 @@ export class MealplansService {
 
   remove(id: number) {
     return this.prisma.mealPlan.delete({
+      where: {
+        id,
+      },
+    });
+  }
+
+  addRecipe(data: Prisma.MealPlanRecipeCreateInput) {
+    return this.prisma.mealPlanRecipe.create({
+      data,
+    });
+  }
+
+  deleteRecipe(id: number) {
+    return this.prisma.mealPlanRecipe.delete({
       where: {
         id,
       },

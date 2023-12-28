@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Put,
@@ -38,5 +37,15 @@ export class MealplansController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.mealplansService.remove(+id);
+  }
+
+  @Post('/recipe')
+  addRecipe(@Body() data: Prisma.MealPlanRecipeCreateInput) {
+    return this.mealplansService.addRecipe(data);
+  }
+
+  @Delete('/recipe')
+  deleteRecipe(@Param('id') id: string) {
+    return this.mealplansService.deleteRecipe(+id);
   }
 }

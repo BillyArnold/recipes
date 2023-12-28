@@ -89,13 +89,13 @@ model MealPlan {
 }
 
 model MealPlanRecipe {
+  id      Int              @id @default(autoincrement())
   mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id])
   mealPlanId Int
   recipe     Recipe   @relation(fields: [recipeId], references: [id])
   recipeId   Int
   day        Int
 
-  @@id([mealPlanId, recipeId, day])
   @@map(name: "meal_plan_recipes")
 }
 
