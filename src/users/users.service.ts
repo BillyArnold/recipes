@@ -31,4 +31,18 @@ export class UsersService {
       data,
     });
   }
+
+  addRecipe(data: Prisma.UserRecipeCreateInput) {
+    return this.prisma.userRecipe.create({
+      data,
+    });
+  }
+
+  deleteRecipe(id: number) {
+    return this.prisma.userRecipe.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
