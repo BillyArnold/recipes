@@ -18,6 +18,7 @@ model Recipe {
   ingredients      Ingredient[]
   users            UserRecipe[]
   RecipeIngredient RecipeIngredient[]
+  RecipeCategory   RecipeCategory[]
   MealPlanRecipe   MealPlanRecipe[]
 
   @@map(name: "recipes")
@@ -35,6 +36,16 @@ model RecipeIngredient {
   @@map(name: "recipe_ingredients")
 }
 
+model RecipeCategory {
+  id           Int        @id @default(autoincrement())
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId     Int
+  category     Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  @@map(name: "recipe_categories") 
+}
+
 model UserRecipe {
   user     User   @relation(fields: [userId], references: [id])
   userId   Int
@@ -49,6 +60,8 @@ model UserRecipe {
 model Category {
   id   Int    @id @default(autoincrement())
   name String
+  recipes  RecipeCategory[]
+  recipeId Int?
 
   @@map(name: "categories")
 }

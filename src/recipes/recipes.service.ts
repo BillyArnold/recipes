@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, Recipe } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { CreateRecipeIngredientDto } from './dto/create-recipe-ingredient.dto';
 
 @Injectable()
 export class RecipesService {
@@ -65,9 +64,17 @@ export class RecipesService {
     });
   }
 
-  //saverecipe for user
+  addCategory(data: Prisma.RecipeCategoryCreateInput) {
+    return this.prisma.recipeCategory.create({
+      data,
+    });
+  }
 
-  //scrape bbc good food?
-
-  //get recipe by ingredient
+  deleteRecipeCategory(id: number) {
+    return this.prisma.recipeCategory.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

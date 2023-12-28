@@ -3,17 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
-  Req,
   Put,
 } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
-import { CreateRecipeIngredientDto } from './dto/create-recipe-ingredient.dto';
-import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Prisma } from '@prisma/client';
-import { ApiBody } from '@nestjs/swagger';
 
 @Controller('recipes')
 export class RecipesController {
@@ -50,6 +45,16 @@ export class RecipesController {
   @Delete('/ingredient')
   deleteIngredient(@Param('id') id: string) {
     return this.recipesService.deleteRecipeIngredient(+id);
+  }
+
+  @Post('/category')
+  addCategory(@Body() data: Prisma.RecipeCategoryCreateInput) {
+    return this.recipesService.addCategory(data);
+  }
+
+  @Delete('/category')
+  deleteCategory(@Param('id') id: string) {
+    return this.recipesService.deleteRecipeCategory(+id);
   }
 
   @Put(':id')
