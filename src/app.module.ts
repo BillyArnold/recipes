@@ -11,7 +11,15 @@ import { IngredientsModule } from './ingredients/ingredients.module';
 import { MealplansModule } from './mealplans/mealplans.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, ConfigModule.forRoot(), RecipesModule, CategoriesModule, IngredientsModule, MealplansModule],
+  imports: [
+    AuthModule,
+    UsersModule,
+    ConfigModule.forRoot(),
+    RecipesModule,
+    CategoriesModule,
+    IngredientsModule,
+    MealplansModule,
+  ],
   controllers: [AppController, AuthController],
   providers: [AppService],
 })
