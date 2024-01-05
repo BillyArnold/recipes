@@ -102,7 +102,7 @@ model MealPlanRecipe {
 // Users
 model User {
   id        Int          @id @default(autoincrement())
-  username  String
+  username  String  @unique
   password  String
   recipes   UserRecipe[]
   mealPlans MealPlan[]
