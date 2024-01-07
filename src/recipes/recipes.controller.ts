@@ -52,7 +52,7 @@ export class RecipesController {
     return this.recipesService.addCategory(data);
   }
 
-  @Delete('/category')
+  @Delete('/category/:id')
   deleteCategory(@Param('id') id: string) {
     return this.recipesService.deleteRecipeCategory(+id);
   }
