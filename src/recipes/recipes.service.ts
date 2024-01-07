@@ -21,6 +21,13 @@ export class RecipesService {
       where: {
         id,
       },
+      include: {
+        RecipeCategory: {
+          include: {
+            category: true,
+          },
+        },
+      },
     });
   }
 
