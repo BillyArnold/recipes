@@ -74,6 +74,9 @@ export class RecipesService {
   addCategory(data: Prisma.RecipeCategoryCreateInput) {
     return this.prisma.recipeCategory.create({
       data,
+      include: {
+        category: true,
+      },
     });
   }
 
