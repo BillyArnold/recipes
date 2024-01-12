@@ -8,6 +8,7 @@ import {
   Put,
   UseInterceptors,
   UploadedFile,
+  Res,
 } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
 import { Prisma } from '@prisma/client';
@@ -72,6 +73,11 @@ export class RecipesController {
   )
   uploadImage(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
+  }
+
+  @Get('/uploads/:imgpath')
+  seeUploadedFile(@Param('imgpath') image, @Res() res) {
+    return res.sendFile(image, { root: './uploads' });
   }
 
   @Delete('/category/:id')
