@@ -6,9 +6,14 @@ import {
   Param,
   Delete,
   Put,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
 import { Prisma } from '@prisma/client';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('recipes')
 export class RecipesController {
@@ -50,6 +55,23 @@ export class RecipesController {
   @Post('/category')
   addCategory(@Body() data: Prisma.RecipeCategoryCreateInput) {
     return this.recipesService.addCategory(data);
+  }
+
+  @Post('upload-image')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const name = file.originalname.split('.')[0];
+          const fileExtName = extname(file.originalname);
+          cb(null, `${name}${fileExtName}`);
+        },
+      }),
+    }),
+  )
+  uploadImage(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
   }
 
   @Delete('/category/:id')

@@ -9,6 +9,7 @@ import { RecipesModule } from './recipes/recipes.module';
 import { CategoriesModule } from './categories/categories.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
 import { MealplansModule } from './mealplans/mealplans.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -19,6 +20,9 @@ import { MealplansModule } from './mealplans/mealplans.module';
     CategoriesModule,
     IngredientsModule,
     MealplansModule,
+    MulterModule.register({
+      dest: './uploads',
+    }),
   ],
   controllers: [AppController, AuthController],
   providers: [AppService],
