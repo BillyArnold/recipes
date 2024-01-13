@@ -16,6 +16,7 @@ model Recipe {
   name             String
   excerpt          String?
   instructions     String?
+  imagePath        String?
   ingredients      Ingredient[]
   users            UserRecipe[]
   RecipeIngredient RecipeIngredient[]
@@ -99,6 +100,18 @@ model MealPlanRecipe {
 
   @@map(name: "meal_plan_recipes")
 }
+
+// model Upload {
+//   id    Int   @id @default(autoincrement())
+//   fieldname String
+//   originalname String
+//   encoding String
+//   mimetype String
+//   destination String
+//   filename String
+//   path String
+//   size Int
+// }
 
 // Users
 model User {

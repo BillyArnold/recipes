@@ -72,7 +72,9 @@ export class RecipesController {
     }),
   )
   uploadImage(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
+    if (file.path) {
+      return file;
+    }
   }
 
   @Get('/uploads/:imgpath')
