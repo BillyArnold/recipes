@@ -58,7 +58,7 @@ export class RecipesController {
     return this.recipesService.addCategory(data);
   }
 
-  @Post('upload-image')
+  @Post('/:id/upload-image')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
@@ -71,9 +71,20 @@ export class RecipesController {
       }),
     }),
   )
-  uploadImage(@UploadedFile() file: Express.Multer.File) {
+  uploadImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Param('id') id: string,
+  ) {
     if (file.path) {
-      return file;
+      const data = {
+        imagePath: file.path,
+      };
+      return this.recipesService.update(+id, data);
+      //if (this.recipesService.update(+id, data)) {
+      //return file;
+      //} else {
+      //  console.error('problem saving image to recipe');
+      //}
     }
   }
 
