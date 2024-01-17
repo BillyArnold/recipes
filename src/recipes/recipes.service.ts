@@ -13,7 +13,16 @@ export class RecipesService {
   }
 
   findAll(data: Prisma.RecipeFindManyArgs) {
-    return this.prisma.recipe.findMany(data);
+    return this.prisma.recipe.findMany({
+      ...data,
+      include: {
+        RecipeCategory: {
+          include: {
+            category: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: number) {
