@@ -22,6 +22,15 @@ export class UsersService {
     });
   }
 
+  update(id: number, data: Prisma.UserUpdateInput) {
+    return this.prisma.user.update({
+      data,
+      where: {
+        id,
+      },
+    });
+  }
+
   async create(data: Prisma.UserCreateInput) {
     const salt = await genSalt(10);
     const hashedPassword = await hash(data.password, salt);

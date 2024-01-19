@@ -1,5 +1,5 @@
 import { UsersService } from './users.service';
-import { Controller, Post, Body, Delete, Param } from '@nestjs/common';
+import { Controller, Post, Body, Delete, Param, Put } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
 @Controller('users')
@@ -9,6 +9,11 @@ export class UsersController {
   @Post()
   create(@Body() data: Prisma.UserCreateInput) {
     return this.usersService.create(data);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() data: Prisma.UserUpdateInput) {
+    return this.usersService.update(+id, data);
   }
 
   @Post('recipe')
