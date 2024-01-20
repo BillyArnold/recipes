@@ -22,6 +22,21 @@ export class UsersService {
     });
   }
 
+  async findById(id: number): Promise<User | undefined> {
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        recipes: {
+          include: {
+            recipe: true,
+          },
+        },
+      },
+    });
+  }
+
   update(id: number, data: Prisma.UserUpdateInput) {
     return this.prisma.user.update({
       data,

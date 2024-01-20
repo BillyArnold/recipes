@@ -1,10 +1,23 @@
 import { UsersService } from './users.service';
-import { Controller, Post, Body, Delete, Param, Put } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Delete,
+  Param,
+  Put,
+  Get,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.usersService.findById(+id);
+  }
 
   @Post()
   create(@Body() data: Prisma.UserCreateInput) {
