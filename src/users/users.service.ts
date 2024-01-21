@@ -33,6 +33,7 @@ export class UsersService {
             recipe: true,
           },
         },
+        mealPlans: true,
       },
     });
   }
