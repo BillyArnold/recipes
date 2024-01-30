@@ -19,6 +19,9 @@ export class UsersService {
       where: {
         username,
       },
+      include: {
+        mealPlans: true,
+      },
     });
   }
 

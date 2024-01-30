@@ -23,7 +23,6 @@ export class AuthService {
     } else {
       throw new Error('User not found');
     }
-    return null;
   }
 
   async login(user: any) {
@@ -31,6 +30,7 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
       id: user.id,
+      mealPlans: user.mealPlans,
     };
   }
 }
