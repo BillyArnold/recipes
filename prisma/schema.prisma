@@ -96,7 +96,7 @@ model MealPlanRecipe {
   mealPlanId Int
   recipe     Recipe   @relation(fields: [recipeId], references: [id])
   recipeId   Int
-  day        Int
+  day        String
 
   @@map(name: "meal_plan_recipes")
 }
