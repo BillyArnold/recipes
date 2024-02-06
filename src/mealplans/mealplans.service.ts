@@ -21,6 +21,13 @@ export class MealplansService {
       where: {
         id,
       },
+      include: {
+        recipes: {
+          include: {
+            recipe: {},
+          },
+        },
+      },
     });
   }
 
