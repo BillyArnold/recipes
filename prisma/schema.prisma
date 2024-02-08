@@ -97,6 +97,7 @@ model MealPlanRecipe {
   recipe     Recipe   @relation(fields: [recipeId], references: [id])
   recipeId   Int
   day        String
+  order      Int?
 
   @@map(name: "meal_plan_recipes")
 }
